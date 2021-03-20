@@ -10,7 +10,8 @@ setup(
   message = FALSE,
   warning = FALSE,
   dev = "cairo_pdf",
-  cache = TRUE,
+  cache = FALSE,
+  cache.rebuild = FALSE,
   cache.path = "_cache/"
 )
 }

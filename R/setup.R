@@ -2,8 +2,14 @@
 #' @import knitr
 #' @export 
 
-setup <- function(echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE, 
-                  dev = "cairo_pdf", cache = TRUE, cache.path = "_cache/") {
+setup <- function(echo = FALSE, 
+                  eval = TRUE, 
+                  message = FALSE, 
+                  warning = FALSE, 
+                  dev = "cairo_pdf", 
+                  cache = FALSE, 
+                  cache.rebuild = FALSE, 
+                  cache.path = "_cache/") {
 
   knitr::opts_chunk$set(
     echo = echo,
@@ -12,7 +18,8 @@ setup <- function(echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE,
     warning = warning,
     dev = dev,
     cache = cache,
-    cache.path = cache.path
+    cache.path = cache.path,
+    cache.rebuild = cache.rebuild
   )
 
   knitr::knit_hooks$set(
