@@ -22,19 +22,25 @@ setup <- function(echo = FALSE,
     cache.rebuild = cache.rebuild
   )
 
+  scape_backslash <- function(s) gsub("\\$", "\\\\$", s)
+
   knitr::knit_hooks$set(
     plot = function(x, options) {
+      cap <- scape_backslash(options$fig.cap)
+      subcap <- scape_backslash(options$fig.subcap)
+      notes <- scape_backslash(options$fig.notes)
+
       knitr::raw_latex(
         paste0(
-          if ((options$wrap == "open" && !is.null(options$wrap)) || !is.null(options$wrap) && options$wrap == T) {
+          if ((options$wrap == "open" && !is.null(options$wrap)) || !is.null(options$wrap) && options$wrap == TRUE) {
             "\\begin{figure}[!h]\n"
           },
-          sprintf("\\begin{subfigure}{\\linewidth}\n\\caption{%s\\label{fig:%s}}\n\\subcap{%s}\n\\includegraphics{%s}\n\\source{%s}\n", options$fig.cap, options$label, options$fig.subcap, x, options$fig.source),
+          sprintf("\\begin{subfigure}{\\linewidth}\n\\caption{%s\\label{fig:%s}}\n\\subcap{%s}\n\\includegraphics{%s}\n\\source{%s}\n", cap, options$label, subcap, x, options$fig.source),
           if (!is.null(options$fig.notes)) {
-            sprintf("\\notes{%s}\n", options$fig.notes)
+            sprintf("\\notes{%s}\n", notes)
           },
           "\\end{subfigure}\n",
-          if ((options$wrap == "close" && !is.null(options$wrap)) || !is.null(options$wrap) && options$wrap == T) {
+          if ((options$wrap == "close" && !is.null(options$wrap)) || !is.null(options$wrap) && options$wrap == TRUE) {
             "\\end{figure}"
           }
         )

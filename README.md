@@ -14,3 +14,9 @@ devtools::install_github("peteconomia/petknitr")
 library(petknitr)
 petknitr::setup()
 ```
+
+## TODO
+
+- [ ] fig.wrap
+  - usa `single`
+- [ ] fig.source, se todas as letras em uppercase então tratar como sigla
